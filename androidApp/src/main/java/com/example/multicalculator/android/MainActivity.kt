@@ -49,7 +49,7 @@ fun CalcNumericButton(){
 
 }
 @Composable
-fun CalcOperationButton(){
+fun CalcOperationButton(operation : String, display : MutableState<String>){
 
 }
 @Composable
