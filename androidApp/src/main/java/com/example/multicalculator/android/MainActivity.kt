@@ -50,6 +50,10 @@ fun CalcNumericButton(){
 }
 @Composable
 fun CalcOperationButton(operation : String, display : MutableState<String>){
+    Button(modifier = Modifier.padding(4.dp),
+        onClick = { /*TODO*/ }) {
+        Text(text = operation)
+    }
 
 }
 @Composable
