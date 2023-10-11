@@ -41,6 +41,15 @@ fun CalcDisplay(){
 
 }
 
+@Composable
+fun CalcNumericButton(){
+
+}
+@Composable
+fun CalcOperationButton(){
+
+}
+
 @Preview
 @Composable
 fun DefaultPreview() {
