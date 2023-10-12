@@ -50,7 +50,7 @@ fun CalcView(){
         }
         Row {
             Column {
-                for(num in 7..1 step 3){
+                for(num in 7 downTo 1 step 3){
                     CalcRow(displayText, 7, 3)
                 }
                 Row {
@@ -84,7 +84,7 @@ fun CalcRow(display : MutableState<String>, startNum : Int, numButtons : Int){
 
 @Composable
 fun CalcDisplay(display : MutableState<String>){
-    Text(text ="$display",
+    Text(text =display.value,
         modifier = Modifier
             .fillMaxWidth()
             .height(50.dp)
@@ -95,7 +95,7 @@ fun CalcDisplay(display : MutableState<String>){
 @Composable
 fun CalcNumericButton(number : Int, display : MutableState<String>){
     Button(modifier = Modifier.padding(4.dp),
-        onClick = { "$display + $number"}) {
+        onClick = {"${display.value} + $number"}) {
         Text(text = "$number")
         
     }
