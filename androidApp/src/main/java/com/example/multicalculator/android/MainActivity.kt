@@ -83,6 +83,12 @@ fun CalcView(){
             complete = false
 
         }
+        if(operation.isNotBlank() && !complete){
+            rightNumber = ((rightNumber * 10) + btnNum)
+        }
+        if(operation.isBlank() && !complete){
+            leftNumber = ((leftNumber * 10) + btnNum)
+        }
     }
     fun operationPress(op : String){
         if(complete){
