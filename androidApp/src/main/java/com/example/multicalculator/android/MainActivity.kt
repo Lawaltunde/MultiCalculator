@@ -4,14 +4,12 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -19,12 +17,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.multicalculator.Greeting
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,11 +42,37 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun CalcView(){
-    var leftNumber = rememberSaveable { mutableStateOf(0) }
-    var rightNumber = rememberSaveable{mutableStateOf(0)}
-    var operation = rememberSaveable{mutableStateOf("")}
-    var complete = rememberSaveable{mutableStateOf(false)}
     val displayText = remember { mutableStateOf("0") }
+    //var leftNumber = rememberSavable{ mutableStateOf(0) }
+    var leftNumber by rememberSaveable{ mutableStateOf(0) }
+    var rightNumber by rememberSaveable{ mutableStateOf(0) }
+    var operation by rememberSaveable{ mutableStateOf("") }
+    var complete by rememberSaveable{ mutableStateOf(false) }
+    if(complete && operation.isNotEmpty()){
+        var answer = 0
+
+        when(operation){
+            "+" -> {
+                answer = leftNumber + rightNumber
+                displayText.value= answer.toString()}
+            "-" -> {
+                answer = leftNumber + rightNumber
+                displayText.value= answer.toString()}
+            "*" -> {
+                answer = leftNumber + rightNumber
+                displayText.value= answer.toString()}
+            "/" -> {
+                if(rightNumber != 0)
+                    answer = leftNumber + rightNumber
+                displayText.value= answer.toString()}
+            else -> {answer = 0
+                displayText.value= answer.toString()}
+        }
+    }
+
+
+
+
     Column(modifier = Modifier.background(color = Color.LightGray)) {
         Row {
             CalcDisplay(displayText)
@@ -71,6 +95,7 @@ fun CalcView(){
             }
         }
     }
+
 
 }
 
