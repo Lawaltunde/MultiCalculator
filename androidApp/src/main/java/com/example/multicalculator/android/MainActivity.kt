@@ -100,8 +100,6 @@ fun CalcView(){
     }
 
 
-
-
     Column(modifier = Modifier.background(color = Color.LightGray)) {
         Row {
             CalcDisplay(displayText)
@@ -109,17 +107,17 @@ fun CalcView(){
         Row {
             Column {
                 for(num in 7 downTo 1 step 3){
-                    CalcRow(displayText, num, 3)
+                    CalcRow({number -> numberPress(number)}, num, 3)
                 }
                 Row {
-                    CalcNumericButton(0, displayText)
-                    CalcEqualsButton(displayText)
+                    CalcNumericButton(0) { number -> numberPress(number) }
+                    CalcEqualsButton { equalsPress() }
                 }
             }
             Column {
                 val operators = listOf("+", "-", "*", "/")
                 for(symbol in operators) {
-                    CalcOperationButton(symbol, displayText)
+                    CalcOperationButton(symbol) { op -> operationPress(op) }
                 }
             }
         }
@@ -129,12 +127,12 @@ fun CalcView(){
 }
 
 @Composable
-fun CalcRow(display : MutableState<String>, startNum : Int, numButtons : Int){
+fun CalcRow(onPress : (number: Int) -> Unit, startNum : Int, numButtons : Int){
     val endNum = startNum + numButtons
     Row(modifier = Modifier.padding(0.dp)) {
         val count = endNum - 1
         for(number in startNum.. count){
-            CalcNumericButton(number, display)
+            CalcNumericButton(number, onPress)
         }
 
     }
@@ -152,16 +150,16 @@ fun CalcDisplay(display : MutableState<String>){
 }
 
 @Composable
-fun CalcNumericButton(number : Int, display : MutableState<String>){
+fun CalcNumericButton(number : Int, onPress: (number : Int) -> Unit){
     Button(modifier = Modifier.padding(4.dp),
-        onClick = {"${display.value} + $number"}) {
+        onClick ={onPress.invoke(number)}) {
         Text(text = "$number")
         
     }
 
 }
 @Composable
-fun CalcOperationButton(operation : String, display : MutableState<String>){
+fun CalcOperationButton(operation : String, onPress: (operation: String) -> Unit){
     Button(modifier = Modifier.padding(4.dp),
         onClick = { /*TODO*/ }) {
         Text(text = operation)
@@ -169,7 +167,7 @@ fun CalcOperationButton(operation : String, display : MutableState<String>){
 
 }
 @Composable
-fun CalcEqualsButton(display : MutableState<String>){
+fun CalcEqualsButton(onpress : () -> Unit){
     Button(modifier = Modifier
         .padding(4.dp)
         , onClick = { "0"}) {
