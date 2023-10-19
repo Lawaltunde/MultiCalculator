@@ -69,6 +69,11 @@ fun CalcView(){
                 displayText.value= answer.toString()}
         }
     }
+    else if(operation.isNotEmpty() && !complete){
+        displayText.value = rightNumber.toString()
+    }
+    else
+        displayText.value = leftNumber.toString()
 
 
 
