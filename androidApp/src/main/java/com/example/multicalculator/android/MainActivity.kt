@@ -75,6 +75,10 @@ fun CalcView(){
     else
         displayText.value = leftNumber.toString()
 
+    fun numberPress(){}
+    fun operationPress(){}
+    fun equalsPress(){}
+
 
 
 
